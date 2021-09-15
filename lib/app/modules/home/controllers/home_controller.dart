@@ -20,34 +20,20 @@ class HomeController extends GetxController {
 
   File? image;
   RxString imagePath = "".obs;
-  RxString description = "".obs; // observable String
+  // RxString description = "".obs; // observable String
 
   TextEditingController? descriptionController;
-  RxString title = "".obs;
+  // RxString title = "".obs;
 
   TextEditingController? titleController;
 
   @override
   void onInit() {
     descriptionController = TextEditingController(text: "");
-
-// adding a listener that automatically updates the textfieldString with the textfield value
-
-// description listener
-    descriptionController!.addListener(() {
-      description.value = descriptionController!.text;
-      debugPrint(description.value);
-    });
     titleController = TextEditingController(text: "");
 
 // adding a listener that automatically updates the textfieldString with the textfield value
 
-// title listener
-
-    titleController!.addListener(() {
-      title.value = titleController!.text;
-      debugPrint(title.value);
-    });
     super.onInit();
     //
     posts.forEach(print);
@@ -65,8 +51,6 @@ class HomeController extends GetxController {
     posts[index] = post;
     posts[index].id = post.id!;
     titleController!.text = post.title!;
-    title.value = post.title!;
-    description.value = post.title!;
 
     descriptionController!.text = post.description!;
     image = post.image!;
@@ -100,18 +84,19 @@ class HomeController extends GetxController {
           image: image,
         );
         posts.add(data);
-        titleController!.text = "";
-        descriptionController!.text = "";
-        title.value = "";
-        description.value = "";
-        titleController = TextEditingController(text: "");
-        descriptionController = TextEditingController(text: "");
-        formKey.currentState!.reset();
+        // titleController!.text = "";
+        // descriptionController!.text = "";
+        // title.value = "";
+        // description.value = "";
+        // titleController = TextEditingController(text: "");
+        // descriptionController = TextEditingController(text: "");
 
         print("Post added success");
         posts.forEach((element) {
           print(element.title);
         });
+        formKey.currentState!.reset();
+
         imagePath.value = "";
         update();
       } else {
@@ -125,22 +110,24 @@ class HomeController extends GetxController {
         if (edtIndex != -1) {
           posts[edtIndex] = data;
         }
-
+        titleController = TextEditingController(text: "");
+        descriptionController = TextEditingController(text: "");
         editPage!.value = false;
       }
-      titleController!.text = "";
-      title.value = "";
-      description.value = "";
+      // titleController!.text = "";
+      // title.value = "";
+      // description.value = "";
 
-      descriptionController!.text = "";
+      // descriptionController!.text = "";
       titleController = TextEditingController(text: "");
       descriptionController = TextEditingController(text: "");
 
-      formKey.currentState!.reset();
       print("Post Updated success");
       posts.forEach((element) {
         print(element.title);
       });
+      formKey.currentState!.reset();
+
       imagePath.value = "";
       update();
     }

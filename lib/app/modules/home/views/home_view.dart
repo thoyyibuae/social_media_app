@@ -212,50 +212,73 @@ class HomeView extends GetView<HomeController> {
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
-                    padding: const EdgeInsets.all(6.0),
+                    padding: const EdgeInsets.all(0.5),
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Align(
-                              alignment: Alignment.topRight,
-                              child: GestureDetector(
-                                  onTap: () {
-                                    Get.defaultDialog(actions: [
-                                      DialogBox(
-                                          onTapButton1: () {
-                                            controller.posts.remove(
-                                                controller.posts[index]);
-                                            Get.back();
-                                          },
-                                          onTapButton2: () {
-                                            // controller.post
-                                            controller.editPost(
-                                                index,
-                                                controller.posts[index],
-                                                controller.posts[index].id!);
-                                            Get.back();
-                                          },
-                                          text1: "Remove",
-                                          text2: "Update")
-                                    ]);
-                                  },
-                                  child: Icon(Icons.more_horiz))),
-                          Container(
-                              child: Text("${controller.posts[index].title}")),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 12.0,
+                                bottom: 1.0,
+                                right: 15.0,
+                                left: 10.0),
+                            child: Align(
+                                alignment: Alignment.topRight,
+                                child: GestureDetector(
+                                    onTap: () {
+                                      Get.defaultDialog(actions: [
+                                        DialogBox(
+                                            onTapButton1: () {
+                                              controller.posts.remove(
+                                                  controller.posts[index]);
+                                              Get.back();
+                                            },
+                                            onTapButton2: () {
+                                              // controller.post
+                                              controller.editPost(
+                                                  index,
+                                                  controller.posts[index],
+                                                  controller.posts[index].id!);
+                                              Get.back();
+                                            },
+                                            text1: "Remove",
+                                            text2: "Update")
+                                      ]);
+                                    },
+                                    child: Icon(Icons.more_horiz))),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Container(
+                                child: Text(
+                                  "${controller.posts[index].title}",
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                              ),
+                            ),
+                          ),
                           // Text("${controller.posts[index].image.runtimeType}"),
                           controller.posts[index].image == "noimage"
                               ? Image.network(
                                   "https://thecsrjournal.in/wp-content/uploads/2018/10/speed-post.png")
                               : Image.file(controller.posts[index].image),
-                          Container(
-                              child: Text(
-                            controller.posts[index].description!,
-                            maxLines: 28,
-                            style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          )),
+                          Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Container(
+                                  child: Text(
+                                      controller.posts[index].description!,
+                                      maxLines: 28),
+                                )),
+                          ),
+
                           Divider(
                             thickness: 2.3,
                             height: 20,
